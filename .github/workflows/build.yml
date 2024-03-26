@@ -25,13 +25,6 @@ jobs:
       run: |
         tag=toolcache
         echo "tag=$tag" >> $GITHUB_OUTPUT
-    - name: Set platform
-      id: platform
-      run: |
-        platform=${{ matrix.os }}
-        platform=${platform/macos-11/macos-latest}
-        platform=${platform/macos-arm-oss/macos-13-arm64}
-        echo "platform=$platform" >> $GITHUB_OUTPUT
     - name: Set ruby
       id: ruby
       run: |
@@ -41,7 +34,7 @@ jobs:
         fi
         echo "ruby=$ruby" >> $GITHUB_OUTPUT
     - name: Check if already built
-      run: '! curl -s -L --head --fail https://github.com/ruby/ruby-builder/releases/download/${{ steps.info.outputs.tag }}/${{ steps.ruby.outputs.ruby }}-${{ steps.platform.outputs.platform }}.tar.gz'
+      run: '! curl -s -L --head --fail https://github.com/quipper/ruby-builder/releases/download/${{ steps.info.outputs.tag }}/${{ steps.ruby.outputs.ruby }}-${{ matrix.os }}.tar.gz'
 
     - name: Set NO_DOCUMENT
       run: |
