@@ -10,9 +10,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ ubuntu-20.04, ubuntu-22.04, macos-11, macos-arm-oss ]
-        ruby: [truffleruby-24.0.0, truffleruby+graalvm-24.0.0]
-    runs-on: ${{ matrix.os }}
+        include:
+        # - os: ubuntu-22.04
+        #   ruby: 3.2.3
+        #   runs-on: ruby-builder-amd64
+        - os: ubuntu-22.04
+          ruby: 3.2.3
+          runs-on: ruby-builder-arm64
+    runs-on: ${{ matrix.runs-on }}
     steps:
     - uses: actions/checkout@v4
     - name: Set tag name
