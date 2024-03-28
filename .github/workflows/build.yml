@@ -57,7 +57,7 @@ jobs:
       run: ruby-build --definitions
 
       # Install packages
-    - run: sudo apt-get install -y --no-install-recommends libyaml-dev libgdbm-dev libreadline-dev libncurses5-dev zlib1g-dev
+    - run: sudo apt-get install -y --no-install-recommends libyaml-dev libgdbm-dev libreadline-dev libncurses5-dev zlib1g-dev wget
       if: startsWith(matrix.os, 'ubuntu') && startsWith(steps.ruby.outputs.ruby, 'ruby-')
 
     - name: Set RUBY_BUILD_RUBY_NAME
